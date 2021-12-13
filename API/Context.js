@@ -50,4 +50,4 @@ const Context = ({ children }) => {
     );
 };
 
-export default Context;
+export default NewsContext;

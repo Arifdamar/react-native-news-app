@@ -1,8 +1,12 @@
 import { AntDesign, MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons"
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import NewsContext from "../API/context"
 
 export default function TabNavigation({ index, setIndex }) {
+
+    const { fetchNews } = useContext(NewsContext)
+
     return (
         <View style={{ ...styles.container, backgroundColor: "#282C35" }}>
             {index === 0 ? (
@@ -28,6 +32,7 @@ export default function TabNavigation({ index, setIndex }) {
             {index ? (
                 <TouchableOpacity
                     style={styles.right}
+                    onPress={() => fetchNews("general")}
                 >
                     <Text style={styles.text}>
                         <AntDesign name="reload1" size={24} color="#007FFF" />

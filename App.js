@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import Context from "./API/Context";
+import NewsContext from "./API/Context";
 import InShortTabs from "./components/InShortTabs";
 
 function App() {
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
 
 export default () => {
   return (
-    <Context>
+    <NewsContext>
       <App />
-    </Context>
+    </NewsContext>
   );
 };
