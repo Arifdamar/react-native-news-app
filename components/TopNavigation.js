@@ -1,17 +1,29 @@
-import { AntDesign, MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons"
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import NewsContext from "../API/context"
+import React, { useContext } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { NewsContext } from "../API/Context";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function TabNavigation({ index, setIndex }) {
-
-    const { fetchNews } = useContext(NewsContext)
+const TopNavigation = ({ index, setIndex }) => {
+    const { darkTheme, setDarkTheme, fetchNews } = useContext(NewsContext);
 
     return (
-        <View style={{ ...styles.container, backgroundColor: "#282C35" }}>
+        <View
+            style={{
+                ...styles.container,
+                backgroundColor: darkTheme ? "#282C35" : "white",
+            }}
+        >
             {index === 0 ? (
-                <TouchableOpacity style={styles.left}>
-                    <Text style={{ ...styles.text, color: "lightgrey" }}>
+                <TouchableOpacity
+                    onPress={() => setDarkTheme(!darkTheme)}
+                    style={styles.left}
+                >
+                    <Text
+                        style={{ ...styles.text, color: darkTheme ? "lightgrey" : "black" }}
+                    >
                         <MaterialCommunityIcons
                             name="theme-light-dark"
                             size={24}
@@ -20,13 +32,20 @@ export default function TabNavigation({ index, setIndex }) {
                     </Text>
                 </TouchableOpacity>
             ) : (
-                <TouchableOpacity style={styles.left} onPress={() => setIndex(index === 0 ? 1 : 0)}>
+                <TouchableOpacity
+                    style={styles.left}
+                    onPress={() => setIndex(index === 0 ? 1 : 0)}
+                >
                     <SimpleLineIcons name="arrow-left" size={15} color="#007FFF" />
-                    <Text style={{ ...styles.text, color: "lightgrey" }}>Discover</Text>
+                    <Text
+                        style={{ ...styles.text, color: darkTheme ? "lightgrey" : "black" }}
+                    >
+                        Discover
+                    </Text>
                 </TouchableOpacity>
             )}
 
-            <Text style={{ ...styles.center, color: "white" }}>
+            <Text style={{ ...styles.center, color: darkTheme ? "white" : "black" }}>
                 {index ? "All News" : "Discover"}
             </Text>
             {index ? (
@@ -44,7 +63,7 @@ export default function TabNavigation({ index, setIndex }) {
                     onPress={() => setIndex(index === 0 ? 1 : 0)}
                 >
                     <Text
-                        style={{ ...styles.text, color: "white" }}
+                        style={{ ...styles.text, color: darkTheme ? "white" : "black" }}
                     >
                         All News
                     </Text>
@@ -52,8 +71,10 @@ export default function TabNavigation({ index, setIndex }) {
                 </TouchableOpacity>
             )}
         </View>
-    )
-}
+    );
+};
+
+export default TopNavigation;
 
 const styles = StyleSheet.create({
     container: {
@@ -85,4 +106,4 @@ const styles = StyleSheet.create({
         width: 80,
         alignItems: "flex-end",
     },
-})
+});

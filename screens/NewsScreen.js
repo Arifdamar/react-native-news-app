@@ -1,13 +1,19 @@
-import React, { useContext, useState } from 'react'
-import { View, Text, Dimensions, StyleSheet } from 'react-native'
+import React, { useContext, useState } from "react";
+import {
+    Dimensions,
+    Text,
+    View,
+    StyleSheet,
+    TouchableOpacity,
+} from "react-native";
 import Carousel from "react-native-snap-carousel";
-import { NewsContext } from "../API/Context"
+import { NewsContext } from "../API/Context";
 import SingleNews from "../components/SingleNews";
 
-export default function NewsScreen() {
-
+const NewsScreen = () => {
     const {
-        news: { articles }
+        news: { articles },
+        darkTheme,
     } = useContext(NewsContext);
 
     const [activeIndex, setActiveIndex] = useState();
@@ -16,25 +22,25 @@ export default function NewsScreen() {
 
     return (
         <View style={styles.carousel}>
-            {
-                articles && (
-                    <Carousel
-                        firstItem={articles.slice(0, 10).length - 1}
-                        layout={"stack"}
-                        data={articles.slice(0, 10)}
-                        sliderHeight={300}
-                        itemHeight={windowHeight}
-                        vertical={true}
-                        renderItem={({ item, index }) => (
-                            <SingleNews item={item} index={index} />
-                        )}
-                        onSnapToItem={(index) => setActiveIndex(index)}
-                    />
-                )
-            }
+            {articles && (
+                <Carousel
+                    firstItem={articles.slice(0, 10).length - 1}
+                    layout={"stack"}
+                    data={articles.slice(0, 10)}
+                    sliderHeight={300}
+                    itemHeight={windowHeight}
+                    vertical={true}
+                    renderItem={({ item, index }) => (
+                        <SingleNews item={item} index={index} darkTheme={darkTheme} />
+                    )}
+                    onSnapToItem={(index) => setActiveIndex(index)}
+                />
+            )}
         </View>
-    )
-}
+    );
+};
+
+export default NewsScreen;
 
 const styles = StyleSheet.create({
     carousel: {

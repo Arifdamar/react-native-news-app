@@ -13,7 +13,7 @@ import {
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const SingleNews = ({ item, index }) => {
+const SingleNews = ({ item, index, darkTheme }) => {
   return (
     <View
       style={{
@@ -29,18 +29,18 @@ const SingleNews = ({ item, index }) => {
       <View
         style={{
           ...styles.description,
-          backgroundColor: "#282C35",
+          backgroundColor: darkTheme ? "#282C35" : "white",
         }}
       >
-        <Text style={{ ...styles.title, color: "white" }}>
+        <Text style={{ ...styles.title, color: darkTheme ? "white" : "black" }}>
           {item.title}
         </Text>
         <Text
-          style={{ ...styles.content, color: "white" }}
+          style={{ ...styles.content, color: darkTheme ? "white" : "black" }}
         >
           {item.description}
         </Text>
-        <Text style={{ color: "white" }}>
+        <Text style={{ color: darkTheme ? "white" : "black" }}>
           Short by
           <Text style={{ fontWeight: "bold" }}>
             {" "}

@@ -1,25 +1,25 @@
-import React, { useState, useContext } from 'react'
-import { View, Text, useWindowDimensions } from 'react-native'
-import { SceneMap, TabView } from "react-native-tab-view";
+import React, { useContext, useState } from "react";
+import { useWindowDimensions } from "react-native";
+import { TabView, SceneMap } from "react-native-tab-view";
 import { NewsContext } from "../API/Context";
 import DiscoverScreen from "../screens/DiscoverScreen";
 import NewsScreen from "../screens/NewsScreen";
-import TabNavigation from "./TabNavigation";
+import TopNavigation from "./TopNavigation";
 
-export default function InShortTabs() {
+export default function InshortTabs() {
     const layout = useWindowDimensions();
 
     const { index, setIndex } = useContext(NewsContext);
 
     const [routes] = useState([
-        { key: 'first', title: 'Discover' },
-        { key: 'second', title: 'News' }
+        { key: "first", title: "Discover" },
+        { key: "second", title: "News" },
     ]);
 
     const renderScene = SceneMap({
         first: DiscoverScreen,
-        second: NewsScreen
-    })
+        second: NewsScreen,
+    });
 
     return (
         <TabView
@@ -27,12 +27,7 @@ export default function InShortTabs() {
             renderScene={renderScene}
             onIndexChange={setIndex}
             initialLayout={{ width: layout.width }}
-            renderTabBar={() =>
-                <TabNavigation
-                    index={index}
-                    setIndex={setIndex}
-                />
-            }
+            renderTabBar={() => <TopNavigation index={index} setIndex={setIndex} />}
         />
-    )
+    );
 }
